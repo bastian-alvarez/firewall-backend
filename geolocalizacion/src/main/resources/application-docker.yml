@@ -1,7 +1,7 @@
 spring:
   datasource:
     url: jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:6543/postgres?currentSchema=geolocation_db&sslmode=require&prepareThreshold=0
-    username: ${DB_USERNAME:${SPRING_DATASOURCE_USERNAME:}}
+    username: ${DB_USERNAME:${SPRING_DATASOURCE_USERNAME:postgres.zlrmlowutfrpphutjvre}}
     password: ${DB_PASSWORD:${SPRING_DATASOURCE_PASSWORD:}}
     driver-class-name: org.postgresql.Driver
   jpa:

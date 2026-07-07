@@ -82,7 +82,7 @@ envVarGroups:
   - name: firewall-supabase
     envVars:
       - key: DB_USERNAME
-        sync: false
+        value: postgres.zlrmlowutfrpphutjvre
       - key: DB_PASSWORD
         sync: false
       - key: SPRING_JPA_HIBERNATE_DDL_AUTO
