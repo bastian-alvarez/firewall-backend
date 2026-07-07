@@ -1,0 +1,89 @@
+services:
+  - type: web
+    name: firewall-ms-usuarios
+    runtime: docker
+    rootDir: usuarios
+    plan: free
+    envVars:
+      - fromGroup: firewall-supabase
+      - key: PORT
+        value: 8084
+      - key: EUREKA_CLIENT_ENABLED
+        value: false
+      - key: SPRING_CLOUD_DISCOVERY_ENABLED
+        value: false
+      - key: MAIL_USERNAME
+        sync: false
+      - key: MAIL_APP_PASSWORD
+        sync: false
+
+  - type: web
+    name: firewall-ms-reportes
+    runtime: docker
+    rootDir: reportes
+    plan: free
+    envVars:
+      - fromGroup: firewall-supabase
+      - key: PORT
+        value: 8081
+      - key: EUREKA_CLIENT_ENABLED
+        value: false
+      - key: SPRING_CLOUD_DISCOVERY_ENABLED
+        value: false
+
+  - type: web
+    name: firewall-ms-geolocalizacion
+    runtime: docker
+    rootDir: geolocalizacion
+    plan: free
+    envVars:
+      - fromGroup: firewall-supabase
+      - key: PORT
+        value: 8083
+      - key: EUREKA_CLIENT_ENABLED
+        value: false
+      - key: SPRING_CLOUD_DISCOVERY_ENABLED
+        value: false
+
+  - type: web
+    name: firewall-ms-alertas
+    runtime: docker
+    rootDir: alertas
+    plan: free
+    envVars:
+      - fromGroup: firewall-supabase
+      - key: PORT
+        value: 8082
+      - key: EUREKA_CLIENT_ENABLED
+        value: false
+      - key: SPRING_CLOUD_DISCOVERY_ENABLED
+        value: false
+      - key: REPORTS_SERVICE_URL
+        value: https://firewall-ms-reportes.onrender.com/api/reportes/enviar
+
+  - type: web
+    name: firewall-api-gateway
+    runtime: docker
+    rootDir: api-gateway
+    plan: free
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: USUARIOS_SERVICE_URL
+        value: https://firewall-ms-usuarios.onrender.com
+      - key: REPORTES_SERVICE_URL
+        value: https://firewall-ms-reportes.onrender.com
+      - key: GEOLOCALIZACION_SERVICE_URL
+        value: https://firewall-ms-geolocalizacion.onrender.com
+      - key: ALERTAS_SERVICE_URL
+        value: https://firewall-ms-alertas.onrender.com
+
+envVarGroups:
+  - name: firewall-supabase
+    envVars:
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: SPRING_JPA_HIBERNATE_DDL_AUTO
+        value: update

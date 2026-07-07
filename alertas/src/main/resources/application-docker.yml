@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://aws-1-sa-east-1.pooler.supabase.com:6543/postgres?currentSchema=alerts_db&sslmode=require&prepareThreshold=0
+    username: ${DB_USERNAME:${SPRING_DATASOURCE_USERNAME:}}
+    password: ${DB_PASSWORD:${SPRING_DATASOURCE_PASSWORD:}}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
